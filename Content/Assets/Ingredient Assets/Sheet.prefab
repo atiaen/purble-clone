@@ -1,0 +1,33 @@
+{
+	"ID": "8eec72ef42234f074cd4b0903e8d29eb",
+	"TypeName": "FlaxEngine.Prefab",
+	"EngineBuild": 6407,
+	"Data": [
+	{
+		"ID": "719c07f34055ae6f0f02efb39d3844f0",
+		"TypeName": "FlaxEngine.StaticModel",
+		"Name": "Sheet",
+		"Transform": {
+			"Translation": {
+				"X": 0.0,
+				"Y": -25.0,
+				"Z": 0.0
+			}
+		},
+		"StaticFlags": 0,
+		"Layer": 3,
+		"Tag": "Cake",
+		"Model": "11574ec4408065bab0ec1b90d7ea5ead",
+		"Buffer": {
+			"Entries": [
+				{
+					"Material": "00000000000000000000000000000000",
+					"ShadowsMode": 3,
+					"Visible": true,
+					"ReceiveDecals": true
+				}
+			]
+		}
+	}
+]
+}

@@ -13,17 +13,12 @@ namespace Game
 
         public static event Action<int> hideCanvas;
 
+        public string[] options;
+        public string stationToTrigger;
 
-        public static event Action<string> itemToSpawn;
+        public static event Action<string,string> stationAndChoseAction;
 
-
-        private bool insideTrigger;
-
-        public string firstToSpawn;
-        public string secToSpawn;
-        public string thirdToSpawn;
-
-        public int id;
+        public bool insideTrigger;
 
       
 
@@ -52,44 +47,46 @@ namespace Game
 
         void OnTriggerEnter(PhysicsColliderActor collider)
         {
-            showCanvas?.Invoke(id);
-            insideTrigger = true;
-
+            //Debug.Log(collider.Tag);
+            if (collider.HasTag("Player"))
+            {
+                insideTrigger = true;
+            }
+           
         }
 
         void OnTriggerExit(PhysicsColliderActor collider)
         {
-            hideCanvas?.Invoke(id);
-            insideTrigger = false;
+            if (collider.HasTag("Player"))
+            {
+                insideTrigger = false;
+            }
         }
 
         /// <inheritdoc/>
         public override void OnUpdate()
         {
-            if (insideTrigger && GameManager.moves > 0)
+
+            if (insideTrigger)
             {
+
                 if (Input.GetAction("First"))
                 {
-                    GameManager.moves = GameManager.moves - 1;
-                    itemToSpawn?.Invoke(firstToSpawn);
+                    stationAndChoseAction?.Invoke(stationToTrigger, options[0]);
                 }
-
+                
                 if (Input.GetAction("Second"))
                 {
-                    GameManager.moves = GameManager.moves - 1;
-                    itemToSpawn?.Invoke(secToSpawn);
+                    stationAndChoseAction?.Invoke(stationToTrigger, options[1]);
+
                 }
 
                 if (Input.GetAction("Third"))
                 {
-                    GameManager.moves = GameManager.moves - 1;
-                    itemToSpawn?.Invoke(thirdToSpawn);
+                    stationAndChoseAction?.Invoke(stationToTrigger, options[2]);
+
                 }
             }
-
-
-
-            // Here you can add code that needs to be called every frame
         }
     }
 }

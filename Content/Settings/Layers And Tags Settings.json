@@ -1,10 +1,11 @@
 {
 	"ID": "bb6fbecf458db0ecffa5e2a5155b2b4f",
 	"TypeName": "FlaxEditor.Content.Settings.LayersAndTagsSettings",
-	"EngineBuild": 6339,
+	"EngineBuild": 6407,
 	"Data": {
 	"Tags": [
 		"Bullet",
+		"Cake",
 		"Floor",
 		"Pan",
 		"Player"
@@ -13,7 +14,7 @@
 		"Default",
 		"Player",
 		"Bullets",
-		null,
+		"Cake",
 		null,
 		null,
 		null,

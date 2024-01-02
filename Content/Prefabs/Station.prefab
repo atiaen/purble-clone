@@ -1,0 +1,139 @@
+{
+	"ID": "c4041bca46fbb089bed7aab659cf84c3",
+	"TypeName": "FlaxEngine.Prefab",
+	"EngineBuild": 6407,
+	"Data": [
+	{
+		"ID": "3466571a45bd3b4cf47bc1ba40493ff5",
+		"TypeName": "FlaxEngine.MeshCollider",
+		"Name": "Station",
+		"Transform": {
+			"Orientation": {
+				"X": 0.0,
+				"Y": 1.0,
+				"Z": 0.0,
+				"W": -4.371138828673793e-8
+			}
+		},
+		"CollisionData": "c55b99b745f4627758e88caa34bd143a"
+	},
+	{
+		"ID": "d6837190496d75e6db57f2986c453b56",
+		"TypeName": "FlaxEngine.BoxCollider",
+		"ParentID": "3466571a45bd3b4cf47bc1ba40493ff5",
+		"Name": "Trigger",
+		"Transform": {
+			"Translation": {
+				"X": 3.238051414489746,
+				"Y": 51.25318145751953,
+				"Z": -162.953369140625
+			},
+			"Orientation": {
+				"X": 0.0,
+				"Y": -1.0,
+				"Z": 0.0,
+				"W": -4.371138828673793e-8
+			}
+		},
+		"IsTrigger": true,
+		"Size": {
+			"X": 250.0,
+			"Y": 100.0,
+			"Z": 100.0
+		}
+	},
+	{
+		"ID": "dcb6cd8c4a8a60adf838489688d4badc",
+		"TypeName": "Game.ColliderInvoker",
+		"ParentID": "d6837190496d75e6db57f2986c453b56",
+		"V": {
+	"options": [
+		"Square",
+		"Circle",
+		"Heart"
+	],
+	"stationToTrigger": "PanStation"
+}
+	},
+	{
+		"ID": "63bf3ebb4f29f22e59c1d0ba9978d997",
+		"TypeName": "FlaxEngine.StaticModel",
+		"ParentID": "d6837190496d75e6db57f2986c453b56",
+		"Name": "Cube",
+		"Transform": {
+			"Scale": {
+				"X": 2.5,
+				"Y": 1.0,
+				"Z": 1.0
+			}
+		},
+		"Model": "b43f0f8f4aaba3f3156896a5a22ba493",
+		"Buffer": {
+			"Entries": [
+				{
+					"Material": "00000000000000000000000000000000",
+					"ShadowsMode": 3,
+					"Visible": true,
+					"ReceiveDecals": true
+				}
+			]
+		}
+	},
+	{
+		"ID": "03c42b01407b77502625f3a095b85fd5",
+		"TypeName": "FlaxEngine.StaticModel",
+		"ParentID": "3466571a45bd3b4cf47bc1ba40493ff5",
+		"Name": "StationModel",
+		"Model": "4b9cd4944033e69e1593d9bbc0f8f24a",
+		"Buffer": {
+			"Entries": [
+				{
+					"Material": "00000000000000000000000000000000",
+					"ShadowsMode": 3,
+					"Visible": true,
+					"ReceiveDecals": true
+				}
+			]
+		}
+	},
+	{
+		"ID": "777dd48547b91a8155a27287f46aab30",
+		"TypeName": "FlaxEngine.BoxCollider",
+		"ParentID": "3466571a45bd3b4cf47bc1ba40493ff5",
+		"Name": "Interactor",
+		"Transform": {
+			"Translation": {
+				"X": 4.778016567230225,
+				"Y": 140.67295837402345,
+				"Z": -17.7762451171875
+			},
+			"Orientation": {
+				"X": 0.0,
+				"Y": -1.0,
+				"Z": 0.0,
+				"W": -4.371138828673793e-8
+			}
+		},
+		"IsTrigger": true,
+		"Size": {
+			"X": 248.0,
+			"Y": 100.0,
+			"Z": 170.0
+		}
+	},
+	{
+		"ID": "862508784d542a3957811ca13d7851ea",
+		"TypeName": "Game.Station",
+		"ParentID": "777dd48547b91a8155a27287f46aab30",
+		"V": {
+	"stationName": "PanStation",
+	"stationType": 1,
+	"itemDictonary": {
+		"Square": "984fe65149b9db21e15345abe3a3079d",
+		"Heart": "027a2296412c68e5a5a59eaba6cefc78",
+		"Circle": "11fbf6184bad6f39e4e785bb7b5c3f3e"
+	}
+}
+	}
+]
+}

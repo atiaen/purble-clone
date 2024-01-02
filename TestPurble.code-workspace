@@ -5,8 +5,8 @@
 		"gulp.autoDetect": "off",
 		"jake.autoDetect": "off",
 		"grunt.autoDetect": "off",
-		"omnisharp.defaultLaunchSolution": "TestPurble.sln",
-		"omnisharp.useModernNet": false
+		"omnisharp.useModernNet": true,
+		"dotnet.defaultSolution": "TestPurble.sln"
 	},
 	"folders": [
 		{
@@ -15,7 +15,7 @@
 		},
 		{
 			"name": "Flax",
-			"path": "C:\\Program Files (x86)\\Flax\\Flax_1.5"
+			"path": "C:\\Program Files (x86)\\Flax\\Flax_1.7"
 		}
 	]
 }

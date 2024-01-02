@@ -1,11 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using FlaxEngine;
 
 public class PlayerMovement : Script
 {
     public CharacterController PlayerController;
     public Actor CameraTarget;
+    public Actor holdPos;
+
     public Camera Camera;
+    public LayersMask hitLayers;
+    public float forwardDistance = 200;
+    public float upDistance = -100;
+
+    public Tag[] pickableTags;
+    public Actor currentGrabbedObject;
 
     public Model SphereModel;
 
@@ -15,6 +24,7 @@ public class PlayerMovement : Script
     public bool UseMouse = true;
 
     public bool unlockMouse = false;
+    public bool isGrabbed = false;
     public float JumpForce = 800;
 
     public float Friction = 8.0f;
@@ -71,10 +81,56 @@ public class PlayerMovement : Script
              var mouseDelta = new Float2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
                 _pitch = Mathf.Clamp(_pitch + mouseDelta.Y, -88, 88);
                 _yaw += mouseDelta.X;
-        }
-
+        }   
+       
         // Cursor
+        RayCastHit hit;
+        if (Physics.RayCast(Camera.Position, Camera.Direction, out hit,maxDistance:int.MaxValue,layerMask:hitLayers,hitTriggers:false))
+        {
+            //if(hit.Collider.Layer == hitLayers)
+            //{
+            //    DebugDraw.DrawSphere(new BoundingSphere(hit.Point, 50), Color.Red);
+            //    Debug.Log("Same Layer");
 
+            //}
+
+            if (hit.Collider.Tags.HasAny(pickableTags))
+            {
+             
+                DebugDraw.DrawLine(Camera.Position, hit.Point, Color.Red);
+                //DebugDraw.DrawSphere(new BoundingSphere(hit.Point, 50), Color.Red);
+                if (Input.GetAction("Grab") && currentGrabbedObject == null)
+                {
+                    //Debug.Log(hit.Collider);
+                    currentGrabbedObject = hit.Collider.Parent;
+                    currentGrabbedObject.As<RigidBody>().IsKinematic = true;
+                    currentGrabbedObject.As<RigidBody>().EnableGravity = false;
+                    currentGrabbedObject.As<RigidBody>().EnableSimulation = false;
+                    //currentGrabbedObject.GetChild<Collider>().IsTrigger = true;
+                    currentGrabbedObject.Parent = Camera;
+                    currentGrabbedObject.Position = Camera.Position + Camera.Transform.Forward * forwardDistance + Camera.Transform.Up * upDistance;
+                    //currentGrabbedObject.Orientation = holdPos.Orientation;
+                    isGrabbed = true;
+                }else if (Input.GetAction("Grab") && currentGrabbedObject != null)
+                {
+                    currentGrabbedObject.As<RigidBody>().IsKinematic = false;
+                    currentGrabbedObject.As<RigidBody>().EnableGravity = true;
+                    currentGrabbedObject.As<RigidBody>().EnableSimulation = true;
+                    //currentGrabbedObject.GetChild<Collider>().IsTrigger = false;
+                    currentGrabbedObject.Parent = Actor.Scene;
+                    currentGrabbedObject.Position = Camera.Position + Camera.Transform.Forward * forwardDistance + Camera.Transform.Up * upDistance;
+                    currentGrabbedObject = null;
+                    isGrabbed = false;
+                }
+            }
+            //DebugDraw.DrawLine(Camera.Position, hit.Point, Color.White);
+
+            //if (isGrabbed)
+            //{
+
+
+            //}
+        }
 
         // Jump
         if (CanJump && Input.GetAction("Jump"))
@@ -185,9 +241,9 @@ public class PlayerMovement : Script
         return Accelerate(accelDir, prevVelocity, AirAccelerate, MaxVelocityAir);
     }
 
-    public override void OnDebugDraw()
-    {
-        var trans = PlayerController.Transform;
-        DebugDraw.DrawWireTube(trans.Translation, trans.Orientation * Quaternion.Euler(90, 0, 0), PlayerController.Radius, PlayerController.Height, Color.Blue);
-    }
+    //public override void OnDebugDraw()
+    //{
+    //    var trans = PlayerController.Transform;
+    //    DebugDraw.DrawWireTube(trans.Translation, trans.Orientation * Quaternion.Euler(90, 0, 0), PlayerController.Radius, PlayerController.Height, Color.Blue);
+    //}
 }

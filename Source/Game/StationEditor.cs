@@ -18,76 +18,76 @@ namespace Game
             // (Values[0] as Station).stationType = StationType.BatterStation;
             // (Values[0] as Station).showBatterDic = true;
 
-            layout.Label("Station Editor", TextAlignment.Center);
-            var enu = layout.Enum("Station Types", typeof(StationType), null, "Select a type", EnumDisplayAttribute.FormatMode.Default);
-            // group.AddElement(enu);
-            // enu.ComboBox.EnumTypeValue = StationType.BatterStation;
+            //layout.Label("Station Editor", TextAlignment.Center);
+            //var enu = layout.Enum("Station Types", typeof(StationType), null, "Select a type", EnumDisplayAttribute.FormatMode.Default);
+            //// group.AddElement(enu);
+            //// enu.ComboBox.EnumTypeValue = StationType.BatterStation;
 
-            enu.ComboBox.EnumValueChanged += (e) =>
-            {
-                enu.ComboBox.EnumTypeValue = e.Value;
-                (Values[0] as Station).stationType = (StationType)e.Value;
+            //enu.ComboBox.EnumValueChanged += (e) =>
+            //{
+            //    enu.ComboBox.EnumTypeValue = e.Value;
+            //    (Values[0] as Station).stationType = (StationType)e.Value;
 
-                if ((Values[0] as Station).stationType == StationType.BatterStation)
-                {
-                    (Values[0] as Station).showBatterDic = true;
-                    (Values[0] as Station).showPanDic = false;
-                    (Values[0] as Station).showMainToppingDic = false;
-                    (Values[0] as Station).showOtherToppingDic = false;
-                    (Values[0] as Station).showSemiLayerDic = false;
-                    (Values[0] as Station).showLayerDic = false;
-                }
+            //    if ((Values[0] as Station).stationType == StationType.BatterStation)
+            //    {
+            //        (Values[0] as Station).showBatterDic = true;
+            //        (Values[0] as Station).showPanDic = false;
+            //        (Values[0] as Station).showMainToppingDic = false;
+            //        (Values[0] as Station).showOtherToppingDic = false;
+            //        (Values[0] as Station).showSemiLayerDic = false;
+            //        (Values[0] as Station).showLayerDic = false;
+            //    }
 
-                if ((Values[0] as Station).stationType == StationType.PanStation)
-                {
-                    (Values[0] as Station).showBatterDic = false;
-                    (Values[0] as Station).showPanDic = true;
-                    (Values[0] as Station).showMainToppingDic = false;
-                    (Values[0] as Station).showOtherToppingDic = false;
-                    (Values[0] as Station).showSemiLayerDic = false;
-                    (Values[0] as Station).showLayerDic = false;
-                }
+            //    if ((Values[0] as Station).stationType == StationType.PanStation)
+            //    {
+            //        (Values[0] as Station).showBatterDic = false;
+            //        (Values[0] as Station).showPanDic = true;
+            //        (Values[0] as Station).showMainToppingDic = false;
+            //        (Values[0] as Station).showOtherToppingDic = false;
+            //        (Values[0] as Station).showSemiLayerDic = false;
+            //        (Values[0] as Station).showLayerDic = false;
+            //    }
 
-                if ((Values[0] as Station).stationType == StationType.LayerStation)
-                {
-                    (Values[0] as Station).showBatterDic = false;
-                    (Values[0] as Station).showPanDic = false;
-                    (Values[0] as Station).showMainToppingDic = false;
-                    (Values[0] as Station).showOtherToppingDic = false;
-                    (Values[0] as Station).showSemiLayerDic = false;
-                    (Values[0] as Station).showLayerDic = true;
-                }
+            //    if ((Values[0] as Station).stationType == StationType.LayerStation)
+            //    {
+            //        (Values[0] as Station).showBatterDic = false;
+            //        (Values[0] as Station).showPanDic = false;
+            //        (Values[0] as Station).showMainToppingDic = false;
+            //        (Values[0] as Station).showOtherToppingDic = false;
+            //        (Values[0] as Station).showSemiLayerDic = false;
+            //        (Values[0] as Station).showLayerDic = true;
+            //    }
 
-                if ((Values[0] as Station).stationType == StationType.SemiLayerStation)
-                {
-                    (Values[0] as Station).showBatterDic = false;
-                    (Values[0] as Station).showPanDic = false;
-                    (Values[0] as Station).showMainToppingDic = false;
-                    (Values[0] as Station).showOtherToppingDic = false;
-                    (Values[0] as Station).showSemiLayerDic = true;
-                    (Values[0] as Station).showLayerDic = false;
-                }
+            //    if ((Values[0] as Station).stationType == StationType.SemiLayerStation)
+            //    {
+            //        (Values[0] as Station).showBatterDic = false;
+            //        (Values[0] as Station).showPanDic = false;
+            //        (Values[0] as Station).showMainToppingDic = false;
+            //        (Values[0] as Station).showOtherToppingDic = false;
+            //        (Values[0] as Station).showSemiLayerDic = true;
+            //        (Values[0] as Station).showLayerDic = false;
+            //    }
 
-                if ((Values[0] as Station).stationType == StationType.ToppingStation)
-                {
-                    (Values[0] as Station).showBatterDic = false;
-                    (Values[0] as Station).showPanDic = false;
-                    (Values[0] as Station).showMainToppingDic = true;
-                    (Values[0] as Station).showOtherToppingDic = false;
-                    (Values[0] as Station).showSemiLayerDic = false;
-                    (Values[0] as Station).showLayerDic = false;
-                }
+            //    if ((Values[0] as Station).stationType == StationType.ToppingStation)
+            //    {
+            //        (Values[0] as Station).showBatterDic = false;
+            //        (Values[0] as Station).showPanDic = false;
+            //        (Values[0] as Station).showMainToppingDic = true;
+            //        (Values[0] as Station).showOtherToppingDic = false;
+            //        (Values[0] as Station).showSemiLayerDic = false;
+            //        (Values[0] as Station).showLayerDic = false;
+            //    }
 
-                if ((Values[0] as Station).stationType == StationType.OtherToppingStation)
-                {
-                    (Values[0] as Station).showBatterDic = false;
-                    (Values[0] as Station).showPanDic = false;
-                    (Values[0] as Station).showMainToppingDic = false;
-                    (Values[0] as Station).showOtherToppingDic = true;
-                    (Values[0] as Station).showSemiLayerDic = false;
-                    (Values[0] as Station).showLayerDic = false;
-                }
-            };
+            //    if ((Values[0] as Station).stationType == StationType.OtherToppingStation)
+            //    {
+            //        (Values[0] as Station).showBatterDic = false;
+            //        (Values[0] as Station).showPanDic = false;
+            //        (Values[0] as Station).showMainToppingDic = false;
+            //        (Values[0] as Station).showOtherToppingDic = true;
+            //        (Values[0] as Station).showSemiLayerDic = false;
+            //        (Values[0] as Station).showLayerDic = false;
+            //    }
+            //};
 
             base.Initialize(layout);
             // (Values[0] as Station).stationType = StationType.BatterStation;

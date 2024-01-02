@@ -1,0 +1,11 @@
+﻿{
+  "profiles": {
+    "Game": {
+      "commandName": "Executable",
+      "workingDirectory": "C:/Users/adeay/Documents/Flax_Projects/purble-clone",
+      "executablePath": "C:/Program Files (x86)/Flax/Flax_master/Binaries/Editor/Win64/Development/FlaxEditor.exe",
+      "commandLineArgs": "-project \"C:/Users/adeay/Documents/Flax_Projects/purble-clone\"",
+      "nativeDebugging": false
+    }
+  }
+}

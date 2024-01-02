@@ -45,7 +45,7 @@ namespace Game
         PanStation,
         SemiLayerStation,
         LayerStation,
-        ToppingStation,
+        FrostingStation,
         OtherToppingStation
     }
 }

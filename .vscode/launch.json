@@ -2,95 +2,100 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"type": "mono",
-			"name": "Game (C# attach)|Editor.Windows.Debug|x64",
-			"request": "attach",
-			"address": "localhost",
-			"port": 55555
+			"type": "coreclr",
+			"name": "TestPurble|Editor.Windows.Debug|x64 (C#)",
+			"request": "launch",
+			"preLaunchTask": "TestPurble|Editor.Windows.Debug|x64",
+			"cwd": "C:\\Users\\adeay\\Documents\\Flax_Projects\\purble-clone",
+			"program": "C:\\Program Files (x86)\\Flax\\Flax_1.7\\Binaries\\Editor\\Win64\\Debug\\FlaxEditor",
+			"args": [
+				"-project",
+				"C:\\Users\\adeay\\Documents\\Flax_Projects\\purble-clone",
+				"-skipCompile"
+			],
+			"stopAtEntry": false,
+			"externalConsole": true
 		},
 		{
-			"type": "mono",
-			"name": "Game (C# attach)|Editor.Windows.Development|x64",
-			"request": "attach",
-			"address": "localhost",
-			"port": 55555
+			"type": "coreclr",
+			"name": "TestPurble|Editor.Windows.Development|x64 (C#)",
+			"request": "launch",
+			"preLaunchTask": "TestPurble|Editor.Windows.Development|x64",
+			"cwd": "C:\\Users\\adeay\\Documents\\Flax_Projects\\purble-clone",
+			"program": "C:\\Program Files (x86)\\Flax\\Flax_1.7\\Binaries\\Editor\\Win64\\Development\\FlaxEditor",
+			"args": [
+				"-project",
+				"C:\\Users\\adeay\\Documents\\Flax_Projects\\purble-clone",
+				"-skipCompile"
+			],
+			"stopAtEntry": false,
+			"externalConsole": true
 		},
 		{
-			"type": "mono",
-			"name": "Game (C# attach)|Editor.Windows.Release|x64",
-			"request": "attach",
-			"address": "localhost",
-			"port": 55555
+			"type": "coreclr",
+			"name": "TestPurble|Editor.Windows.Release|x64 (C#)",
+			"request": "launch",
+			"preLaunchTask": "TestPurble|Editor.Windows.Release|x64",
+			"cwd": "C:\\Users\\adeay\\Documents\\Flax_Projects\\purble-clone",
+			"program": "C:\\Program Files (x86)\\Flax\\Flax_1.7\\Binaries\\Editor\\Win64\\Release\\FlaxEditor",
+			"args": [
+				"-project",
+				"C:\\Users\\adeay\\Documents\\Flax_Projects\\purble-clone",
+				"-skipCompile"
+			],
+			"stopAtEntry": false,
+			"externalConsole": true
 		},
 		{
-			"type": "mono",
-			"name": "Game (C# attach)|Game.Windows.Debug|x64",
-			"request": "attach",
-			"address": "localhost",
-			"port": 55555
+			"type": "coreclr",
+			"name": "TestPurble|Game.Windows.Debug|x64 (C#)",
+			"request": "launch",
+			"preLaunchTask": "TestPurble|Game.Windows.Debug|x64",
+			"cwd": "C:\\Users\\adeay\\Documents\\Flax_Projects\\purble-clone",
+			"program": "C:\\Program Files (x86)\\Flax\\Flax_1.7\\Binaries\\Editor\\Win64\\Debug\\FlaxEditor",
+			"args": [
+				"-project",
+				"C:\\Users\\adeay\\Documents\\Flax_Projects\\purble-clone",
+				"-skipCompile"
+			],
+			"stopAtEntry": false,
+			"externalConsole": true
 		},
 		{
-			"type": "mono",
-			"name": "Game (C# attach)|Game.Windows.Debug|Win32",
-			"request": "attach",
-			"address": "localhost",
-			"port": 55555
+			"type": "coreclr",
+			"name": "TestPurble|Game.Windows.Development|x64 (C#)",
+			"request": "launch",
+			"preLaunchTask": "TestPurble|Game.Windows.Development|x64",
+			"cwd": "C:\\Users\\adeay\\Documents\\Flax_Projects\\purble-clone",
+			"program": "C:\\Program Files (x86)\\Flax\\Flax_1.7\\Binaries\\Editor\\Win64\\Development\\FlaxEditor",
+			"args": [
+				"-project",
+				"C:\\Users\\adeay\\Documents\\Flax_Projects\\purble-clone",
+				"-skipCompile"
+			],
+			"stopAtEntry": false,
+			"externalConsole": true
 		},
 		{
-			"type": "mono",
-			"name": "Game (C# attach)|Game.Windows.Development|x64",
-			"request": "attach",
-			"address": "localhost",
-			"port": 55555
+			"type": "coreclr",
+			"name": "TestPurble|Game.Windows.Release|x64 (C#)",
+			"request": "launch",
+			"preLaunchTask": "TestPurble|Game.Windows.Release|x64",
+			"cwd": "C:\\Users\\adeay\\Documents\\Flax_Projects\\purble-clone",
+			"program": "C:\\Program Files (x86)\\Flax\\Flax_1.7\\Binaries\\Editor\\Win64\\Release\\FlaxEditor",
+			"args": [
+				"-project",
+				"C:\\Users\\adeay\\Documents\\Flax_Projects\\purble-clone",
+				"-skipCompile"
+			],
+			"stopAtEntry": false,
+			"externalConsole": true
 		},
 		{
-			"type": "mono",
-			"name": "Game (C# attach)|Game.Windows.Development|Win32",
+			"type": "coreclr",
+			"name": "TestPurble (C# Attach Editor)",
 			"request": "attach",
-			"address": "localhost",
-			"port": 55555
-		},
-		{
-			"type": "mono",
-			"name": "Game (C# attach)|Game.Windows.Release|x64",
-			"request": "attach",
-			"address": "localhost",
-			"port": 55555
-		},
-		{
-			"type": "mono",
-			"name": "Game (C# attach)|Game.Windows.Release|Win32",
-			"request": "attach",
-			"address": "localhost",
-			"port": 55555
-		},
-		{
-			"type": "mono",
-			"name": "Game (C# attach)|Game.UWP.Debug|x64",
-			"request": "attach",
-			"address": "localhost",
-			"port": 55555
-		},
-		{
-			"type": "mono",
-			"name": "Game (C# attach)|Game.UWP.Development|x64",
-			"request": "attach",
-			"address": "localhost",
-			"port": 55555
-		},
-		{
-			"type": "mono",
-			"name": "Game (C# attach)|Game.UWP.Release|x64",
-			"request": "attach",
-			"address": "localhost",
-			"port": 55555
-		},
-		{
-			"type": "mono",
-			"name": "BuildScripts (C# attach)|Debug|AnyCPU",
-			"request": "attach",
-			"address": "localhost",
-			"port": 55555
+			"processName": "FlaxEditor"
 		}
 	]
 }

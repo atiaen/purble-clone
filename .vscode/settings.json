@@ -12,5 +12,5 @@
 		"**/Output": true,
 		"**/*.flax": true
 	},
-	"omnisharp.useModernNet": false
+	"omnisharp.useModernNet": true
 }

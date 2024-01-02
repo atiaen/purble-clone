@@ -1,7 +1,7 @@
 {
 	"ID": "4eaf325e4cd72aa4cdeb6393cad05466",
 	"TypeName": "FlaxEditor.Content.Settings.GraphicsSettings",
-	"EngineBuild": 6339,
+	"EngineBuild": 6406,
 	"Data": {
 	"UseVSync": true,
 	"AAQuality": 0,
@@ -14,7 +14,7 @@
 	"DefaultProbeResolution": 128,
 	"UseHDRProbes": false,
 	"EnableGlobalSDF": false,
-	"GlobalSDFQuality": 2,
+	"GlobalSDFQuality": 0,
 	"GenerateSDFOnModelImport": false,
 	"GIQuality": 0,
 	"GIProbesSpacing": 100.0,
@@ -22,7 +22,7 @@
 	"PostProcessSettings": {
 		"AO": {
 			"OverrideFlags": 0,
-			"Enabled": true,
+			"Enabled": false,
 			"Intensity": 0.8,
 			"Power": 0.75,
 			"Radius": 0.7,
@@ -44,8 +44,8 @@
 			}
 		},
 		"Bloom": {
-			"OverrideFlags": 0,
-			"Enabled": true,
+			"OverrideFlags": 1,
+			"Enabled": false,
 			"Intensity": 1.0,
 			"Threshold": 3.0,
 			"BlurSigma": 4.0,
@@ -186,7 +186,7 @@
 		},
 		"EyeAdaptation": {
 			"OverrideFlags": 0,
-			"Mode": 2,
+			"Mode": 0,
 			"SpeedUp": 3.0,
 			"SpeedDown": 1.0,
 			"PreExposure": 0.0,
@@ -217,8 +217,8 @@
 			}
 		},
 		"LensFlares": {
-			"OverrideFlags": 0,
-			"Intensity": 1.0,
+			"OverrideFlags": 1,
+			"Intensity": 0.0,
 			"Ghosts": 8,
 			"HaloWidth": 0.16,
 			"HaloIntensity": 0.666,
@@ -251,15 +251,15 @@
 			"BokehDepthCutoff": 1.5
 		},
 		"MotionBlur": {
-			"OverrideFlags": 0,
-			"Enabled": true,
+			"OverrideFlags": 1,
+			"Enabled": false,
 			"Scale": 1.0,
 			"SampleCount": 10,
 			"MotionVectorsResolution": 2
 		},
 		"SSR": {
-			"OverrideFlags": 0,
-			"Intensity": 1.0,
+			"OverrideFlags": 1,
+			"Intensity": 0.0,
 			"TraceMode": 0,
 			"DepthResolution": 2,
 			"RayTracePassResolution": 2,
@@ -277,8 +277,8 @@
 			"TemporalResponse": 0.8
 		},
 		"AA": {
-			"OverrideFlags": 0,
-			"Mode": 1,
+			"OverrideFlags": 1,
+			"Mode": 0,
 			"TAA_JitterSpread": 0.75,
 			"TAA_Sharpness": 0.0,
 			"TAA_StationaryBlending": 0.95,

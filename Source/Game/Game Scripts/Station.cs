@@ -10,12 +10,10 @@ namespace Game
     public class Station : Script
     {
         /// <inheritdoc/>
-        [HideInEditor]
+
+        public string stationName;
+
         public StationType stationType;
-
-        public Collider stationCollider;
-
-        public Collider triggerCollider;
 
         public Actor currentCake;
 
@@ -23,80 +21,34 @@ namespace Game
 
         public Actor currentSpawn;
 
-        [HideInEditor]
-        public bool showPanDic;
+        bool canModifyCake = false;
+        //bool canModifyCake = false;
 
-        [VisibleIf(nameof(showPanDic))]
-        public Dictionary<string, Prefab> panDic;
+        public Dictionary<string, Model> itemDictonary;
+        public Dictionary<string, Model> filledModel;
 
-
-        [HideInEditor]
-        public bool showBatterDic;
-
-        [VisibleIf(nameof(showBatterDic))]
-        public Dictionary<string, Prefab> batterDic;
-
-        [HideInEditor]
-        public bool showLayerDic;
-
-        [VisibleIf(nameof(showLayerDic))]
-        public Dictionary<string, Prefab> layerDic;
-
-        [HideInEditor]
-        public bool showSemiLayerDic;
-
-        [VisibleIf(nameof(showSemiLayerDic))]
-        public Dictionary<string, Prefab> semiLayerDic;
-
-        [HideInEditor]
-        public bool showMainToppingDic;
-
-        [VisibleIf(nameof(showMainToppingDic))]
-        public Dictionary<string, Prefab> mainToppingDic;
-
-        [HideInEditor]
-        public bool showOtherToppingDic;
-
-        [VisibleIf(nameof(showOtherToppingDic))]
-        public Dictionary<string, Prefab> otherToppingDic;
 
         public override void OnStart()
         {
-            // Here you can add code that needs to be called when script is created, just before the first game update
-            Debug.Log(GameManager.difficulty);
-            if (GameManager.difficulty == "Beginner")
-            {
-                if (stationType == StationType.SemiLayerStation || stationType == StationType.OtherToppingStation)
-                {
-                    Actor.IsActive = false;
-                    triggerCollider.As<Actor>().IsActive = false;
-                    stationCollider.As<Actor>().IsActive = false;
-                }
-            }
-
-            if (GameManager.difficulty == "Intermediate")
-            {
-                if (stationType == StationType.OtherToppingStation)
-                {
-                    Actor.IsActive = false;
-                    triggerCollider.As<Actor>().IsActive = false;
-                    stationCollider.As<Actor>().IsActive = false;
-                }
-            }
+           
         }
 
         /// <inheritdoc/>
         public override void OnEnable()
         {
-            stationCollider.As<Collider>().TriggerEnter += OnTriggerEnter;
-            ColliderInvoker.itemToSpawn += SpawnItem;
+            Actor.As<Collider>().TriggerEnter += OnTriggerEnter;
+            Actor.As<Collider>().TriggerExit += OnTriggerExit;
+            ColliderInvoker.stationAndChoseAction += modifyCake;
+
         }
 
         /// <inheritdoc/>
         public override void OnDisable()
         {
-            stationCollider.As<Collider>().TriggerEnter -= OnTriggerEnter;
-            ColliderInvoker.itemToSpawn -= SpawnItem;
+            Actor.As<Collider>().TriggerEnter -= OnTriggerEnter;
+            Actor.As<Collider>().TriggerExit -= OnTriggerExit;
+            ColliderInvoker.stationAndChoseAction -= modifyCake;
+
         }
 
         /// <inheritdoc/>
@@ -107,56 +59,139 @@ namespace Game
 
         void OnTriggerEnter(PhysicsColliderActor collider)
         {
-            if (currentCake == null && !collider.HasTag("Floor"))
+            var parent = collider.As<Actor>().Parent;
+            if (parent.HasTag("Cake"))
             {
-                currentCake = collider;
+                canModifyCake = true;
+                currentCake = collider.As<Actor>().Parent;
             }
+           
         }
 
-        void SpawnItem(string itemName)
+        void OnTriggerExit(PhysicsColliderActor collider)
         {
+            canModifyCake = false;
+            currentCake = null;
+        }
 
-            switch (stationType)
+        void modifyCake(string _stationName,string chosenItem)
+        {
+            
+
+            if (canModifyCake && currentCake != null && _stationName == stationName)
             {
-                case StationType.PanStation:
-                    PrefabManager.SpawnPrefab(panDic[itemName]);
-                    // currentCake.GetChild<Joint>().Target = currentSpawn;
-                    break;
+                var cakeChildren = currentCake.GetChildren<Actor>();
+                var cakeScript = currentCake.GetScript<Cake>();
+                var sheet = cakeChildren[0];
 
-                case StationType.BatterStation:
-                    PrefabManager.SpawnPrefab(batterDic[itemName], spawnPoint);
-                    currentCake.GetChild<Joint>().Target = currentSpawn;
-                    break;
+                if (stationType == StationType.PanStation)
+                {
+                    //if(cakeScript.currentLayer < cakeScript.maxLayers) 
+                    //{
+                       
+                    //}
 
-                case StationType.LayerStation:
-                    currentSpawn = PrefabManager.SpawnPrefab(layerDic[itemName], spawnPoint);
-                    currentCake.GetChild<Joint>().Target = currentSpawn;
-                    break;
+                    var sheetChildren = sheet.GetChildren<Actor>();
+                    if (sheetChildren.Length == 0)
+                    {
+                        currentCake.GetScript<Cake>().currentLayer++;
+                        var firstLayer = sheet.AddChild<StaticModel>();
+                        firstLayer.AddScript<Layers>();
 
-                case StationType.OtherToppingStation:
-                    currentSpawn = PrefabManager.SpawnPrefab(otherToppingDic[itemName], spawnPoint);
-                    currentCake.GetChild<Joint>().Target = currentSpawn;
-                    break;
+                        firstLayer.GetScript<Layers>().shapeType = chosenItem;
+                        firstLayer.Model = itemDictonary[chosenItem];
+                        firstLayer.Position = new Vector3(currentCake.Position.X, currentCake.Position.Y - 20, currentCake.Position.Z);
+                    }
+
+                    if (sheetChildren.Length != 0)
+                    {
+                        var lastLayer = sheetChildren[sheetChildren.Length - 1];
+                        var lastLayerScript = lastLayer.GetScript<Layers>();
+                        if (!lastLayerScript.isFilled)
+                        {
+                            var lastLayerModel = lastLayer.As<StaticModel>();
+                            lastLayerModel.GetScript<Layers>().shapeType = chosenItem;
+                            lastLayerModel.Model = itemDictonary[chosenItem];
+                        }
+
+                        if (lastLayerScript.isFilled && cakeScript.currentLayer < cakeScript.maxLayers)
+                        {
+                            currentCake.GetScript<Cake>().currentLayer++;
+                            var nextLayer = sheet.AddChild<StaticModel>();
+                            nextLayer.AddScript<Layers>();
+
+                            nextLayer.GetScript<Layers>().shapeType = chosenItem;
+
+                            nextLayer.Model = itemDictonary[chosenItem];
+                            nextLayer.Position = new Vector3(lastLayer.Position.X, lastLayer.Position.Y + 20, lastLayer.Position.Z);
+                        }
+                    }
+
+                }
+
+                if (stationType == StationType.BatterStation)
+                {
+                    var lastLayer = sheet.GetChild(sheet.GetChildren<Actor>().Length - 1);
+                    var script = lastLayer.GetScript<Layers>();
+
+                    if (!script.isFrosted)
+                    {
+                        string shapeType = script.shapeType;
+
+                        lastLayer.As<StaticModel>().Model = filledModel[shapeType];
+
+                        var mat = lastLayer.As<StaticModel>().Model.MaterialSlots[0].Material;
+
+                        var instance = mat.CreateVirtualInstance();
+
+                        instance.SetParameterValue("Color", Color.ParseHex(chosenItem));
+
+                        lastLayer.As<StaticModel>().SetMaterial(0, instance);
+
+                        lastLayer.GetScript<Layers>().isFilled = true;
+                        lastLayer.GetScript<Layers>().flavourType = chosenItem;
+                    }
 
 
-                case StationType.SemiLayerStation:
-                    currentSpawn = PrefabManager.SpawnPrefab(semiLayerDic[itemName], spawnPoint);
-                    currentCake.GetChild<Joint>().Target = currentSpawn;
-                    break;
+                }
 
-                case StationType.ToppingStation:
-                    currentSpawn = PrefabManager.SpawnPrefab(mainToppingDic[itemName], spawnPoint);
-                    currentCake.GetChild<Joint>().Target = currentSpawn;
-                    break;
+                if (stationType == StationType.FrostingStation)
+                {
+                    var lastLayer = sheet.GetChild(sheet.GetChildren<Actor>().Length - 1);
+                    var script = lastLayer.GetScript<Layers>();
 
-                default:
-                    currentSpawn = PrefabManager.SpawnPrefab(panDic[itemName], spawnPoint);
-                    currentCake.GetChild<Joint>().Target = currentSpawn;
-                    break;
+                    string shapeType = script.shapeType;
 
+                    if(lastLayer.Children.Length == 0)
+                    {
+                        lastLayer.AddChild<StaticModel>().Model = filledModel[shapeType];
+                        var frosting = lastLayer.GetChild<StaticModel>();
+                        var mat = frosting.As<StaticModel>().Model.MaterialSlots[0].Material;
 
+                        var instance = mat.CreateVirtualInstance();
+
+                        instance.SetParameterValue("Color", Color.ParseHex(chosenItem));
+
+                        frosting.As<StaticModel>().SetMaterial(0, instance);
+                        lastLayer.GetScript<Layers>().isFrosted = true;
+                        lastLayer.GetScript<Layers>().frostingFlavour = chosenItem;
+                    }
+                    else
+                    {
+                        var frosting = lastLayer.GetChild<StaticModel>();
+                        var mat = frosting.As<StaticModel>().Model.MaterialSlots[0].Material;
+
+                        var instance = mat.CreateVirtualInstance();
+
+                        instance.SetParameterValue("Color", Color.ParseHex(chosenItem));
+
+                        frosting.As<StaticModel>().SetMaterial(0, instance);
+                        lastLayer.GetScript<Layers>().isFrosted = true;
+                        lastLayer.GetScript<Layers>().frostingFlavour = chosenItem;
+
+                    }
+                }
             }
-            // var itm = PrefabManager.SpawnPrefab(panDic[itemName]);
         }
     }
 }

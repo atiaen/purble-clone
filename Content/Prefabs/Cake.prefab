@@ -1,0 +1,32 @@
+{
+	"ID": "0e1fff6e401748aa2369f5b34250d33f",
+	"TypeName": "FlaxEngine.Prefab",
+	"EngineBuild": 6407,
+	"Data": [
+	{
+		"ID": "4411ea37407b70ab4a3bf7a0452b94c5",
+		"TypeName": "FlaxEngine.RigidBody",
+		"ParentID": "00000000000000000000000000000000",
+		"Name": "Cake",
+		"Transform": {
+			"Translation": {
+				"X": 772.5247802734375,
+				"Y": 287.4040222167969,
+				"Z": -794.1209106445313
+			}
+		},
+		"StaticFlags": 0,
+		"Layer": 3,
+		"Tag": "Cake"
+	},
+	{
+		"ID": "36801add4d8b0677c88745b91d5f366b",
+		"TypeName": "Game.Cake",
+		"ParentID": "4411ea37407b70ab4a3bf7a0452b94c5",
+		"V": {
+			"maxLayers": 3,
+			"sheetPrefab": "8eec72ef42234f074cd4b0903e8d29eb"
+		}
+	}
+]
+}
