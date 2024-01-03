@@ -4,40 +4,12 @@ using FlaxEngine;
 
 namespace Game
 {
-    /// <summary>
-    /// FoodBase Script.
-    /// </summary>
-    public enum BatterTypes
+    
+    public enum Difficulty
     {
-        Strawberry,
-        Chocolate,
-        Vanilla
-    }
-
-    public enum IcingTypes
-    {
-        Strawberry,
-        Chocolate,
-        Vanilla
-    }
-
-    public enum LayerTypes
-    {
-        Red,
-        Green,
-        White
-    }
-
-    public enum PanTypes
-    {
-        Square,
-        Circle,
-        Heart
-    }
-
-    public enum OthersTypes
-    {
-        Sprinkles,
+        Beginner,
+        Intermediate,
+        Expert
     }
 
     public enum StationType{
