@@ -38,7 +38,7 @@ public class Submitter : Script
         // Check for player
         if (collider.HasTag(checkingTag))
         {
-            onCakeSubmitted.Invoke(collider);
+            onCakeSubmitted?.Invoke(collider);
         }
     }
 

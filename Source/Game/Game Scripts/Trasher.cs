@@ -13,7 +13,7 @@ public class Trasher : Script
 
     /// <inheritdoc/>
     /// 
-    public static event Action<PhysicsColliderActor> onCakeDestroy;
+    public static event Action onCakeDestroy;
 
     public override void OnStart()
     {
@@ -38,7 +38,7 @@ public class Trasher : Script
         // Check for player
         if (collider.HasTag(tagToDestroy))
         {
-            onCakeDestroy.Invoke(collider);
+            onCakeDestroy?.Invoke();
         }
     }
 
