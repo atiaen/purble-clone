@@ -17,11 +17,8 @@ namespace Game
 
         public Actor currentCake;
 
-        public Actor spawnPoint;
-
-        public Actor currentSpawn;
-
         bool canModifyCake = false;
+
         //bool canModifyCake = false;
 
         public Dictionary<string, Model> itemDictonary;
@@ -30,7 +27,7 @@ namespace Game
 
         public override void OnStart()
         {
-           
+
         }
 
         /// <inheritdoc/>

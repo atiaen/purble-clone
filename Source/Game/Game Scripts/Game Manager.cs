@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Security.Cryptography;
@@ -10,6 +10,9 @@ namespace Game
     public class GameManager : Script
     {
         public Actor displayPosition;
+
+        public Prefab initalfoodPrefab;
+        public Actor initalFoodSpawnLocation;
 
         public int layerSize = 0;
 
@@ -86,9 +89,11 @@ namespace Game
             {
                 displayPosition.DestroyChildren();
                 GenerateFood();
+                //var p = PrefabManager.SpawnPrefab(initalfoodPrefab, initalFoodSpawnLocation);
+                //p.Parent = Scene;
             }
 
-            if(foodMade == foodToMake || incorrectFoodMade == maxIncorrectFoodAllowed)
+            if (foodMade == foodToMake || incorrectFoodMade == maxIncorrectFoodAllowed)
             {
                 onGameOverEvent?.Invoke();
                 GameOver();
@@ -126,7 +131,6 @@ namespace Game
             setParameters();
 
             layerSize = getLayerSizeFromDiff();
-
 
             for (int i = 0; i < layerSize; i++)
             {
@@ -193,6 +197,8 @@ namespace Game
 
                 }
             }
+
+            spawnCakeSheet();
         }
 
         public int getLayerSizeFromDiff()
@@ -200,16 +206,19 @@ namespace Game
 
             if (difficulty == Difficulty.Intermediate)
             {
+                //Debug.Log("Intermediate");
                 int rand = random.Next(1, maxCakeLayers + 1);
                 return rand;
             }
             else if (difficulty == Difficulty.Expert)
             {
+                //Debug.Log("Expert");
                 int rand = random.Next(2, maxCakeLayers + 1);
                 return rand;
             }
             else
             {
+                //Debug.Log("Beginner");
                 return maxCakeLayers;
             }
         }
@@ -221,8 +230,16 @@ namespace Game
 
             if (sheet.ChildrenCount != layerSize)
             {
-                score -= -40;
+                if(score > 0)
+                {
+                    score -= -300;
+                }
+                else
+                {
+                    score += -300;
+                }
                 food.Parent.IsActive = false;
+                incorrectFoodMade++;
             }
             else
             {
@@ -255,24 +272,76 @@ namespace Game
                 food.Parent.IsActive = false;
                 foodMade++;
             }
+
+            spawnCakeSheet();
+
+            //displayPosition.DestroyChildren();
+            //GenerateFood();
+            //subtractFromScoreBasedOnDiff();
         }
 
         public void GameOver()
         {
             if(foodMade == foodToMake)
             {
+                gameOverPanel.IsActive = true;
+                var endingText = gameOverPanel.FindActor("EndingText");
+                endingText.As<UIControl>().Get<Label>().Text = "Congratulations!!!";
+                endingText.As<UIControl>().Get<Label>().LocalX = 0;
+                scoreDisplay.Get<Label>().Text = score.ToString();
 
             }
 
-            if(incorrectFoodMade == maxIncorrectFoodAllowed)
+            if (incorrectFoodMade == maxIncorrectFoodAllowed)
             {
-                score = 0;
+                //score = 0;
+                gameOverPanel.IsActive = true;
+                var endingText = gameOverPanel.FindActor("EndingText");
+                endingText.As<UIControl>().Get<Label>().Text = "Game over \n  Unfortunately you did a terrible job";
+                endingText.As<UIControl>().Get<Label>().LocalX = 0;
+                scoreDisplay.Get<Label>().Text = score.ToString();
+
+
+
             }
         }
 
-        public void trashedFood()
+        public void trashedFood(PhysicsColliderActor food)
         {
-            score -= 300;
+            
+            Destroy(food.Parent);
+            subtractFromScoreBasedOnDiff();
+            spawnCakeSheet();
+            //var pr = PrefabManager.SpawnPrefab(initalfoodPrefab, initalFoodSpawnLocation);
+            //pr.Parent = Scene;
         }
+
+        public void subtractFromScoreBasedOnDiff()
+        {
+            if(difficulty == Difficulty.Beginner)
+            {
+                score -= 100;
+            }
+
+            if (difficulty == Difficulty.Intermediate)
+            {
+                score -= 300;
+
+            }
+
+            if (difficulty == Difficulty.Expert)
+            {
+                score -= 500;
+
+            }
+        }
+    
+        public void spawnCakeSheet()
+        {
+            var pr = PrefabManager.SpawnPrefab(initalfoodPrefab, initalFoodSpawnLocation);
+            pr.Parent = Scene;
+            pr.GetScript<Cake>().maxLayers = maxCakeLayers;
+        }
+
     }
 }

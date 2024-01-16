@@ -248,6 +248,7 @@ public class PlayerMovement : Script
     public void onGameOver()
     {
         controllerDisabled = true;
+        unlockMouse = true;
     }
     //public override void OnDebugDraw()
     //{
